@@ -53,7 +53,9 @@
                 class="notAwailableText">
                 Product is not available
             </p> 
-            <button class="btn bg-primary btn-block" [disabled]="!mobile.isAvailable">{{mobile.isAvailable ? 'Buy Now' : 'Out Of Stock'}}</button> 
+            <!-- <button class="btn bg-primary btn-block" [disabled]="!mobile.isAvailable">{{mobile.isAvailable ? 'Buy Now' : 'Out Of Stock'}}</button>  -->
+             <button class="btn btn-block bg-primary" *ngIf="mobile.isAvailable">Buy Now</button>
+             <button class="btn btn-block" disabled *ngIf="!mobile.isAvailable">Out Of Stock</button>
         </div>
         
     </div>
