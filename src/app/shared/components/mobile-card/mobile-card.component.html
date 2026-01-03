@@ -1,0 +1,60 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4" [ngClass]="{notAvailable: !mobile.isAvailable}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="img-container">
+                            <!-- <img [src]="mobile.image || 'https://placehold.co/600x400/EEE/31343C'"  alt=""> -->
+                             <img [src]="mobile.image" alt="" *ngIf="mobile.image; else noImage">
+                        </div>
+
+                        <ng-template #noImage>
+                            <p>
+                                No Image
+                            </p>
+                        </ng-template>
+                    </div>
+                    <div class="col-md-7">
+                        <h2 font-weight-bold>{{mobile.name}}<small  [ngClass]="{
+                                'badge-success':mobile.rating >= 4,
+                                'badge-warning':mobile.rating >= 3,
+                                'badge-danger':mobile.rating < 3
+                            }" class="badge p-2 ml-2">{{mobile.rating}}</small>
+                        </h2>
+                        <h5 class="text-muted">
+                            Features
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"*ngFor="let features of mobile.features">
+                                {{features}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="font-weight-bold">
+                            {{mobile.price - mobile.price * .15 | currency: 'INR'}}
+                            <small class="d-block">
+                                <del>
+                                    {{mobile.price | currency: 'INR'}}
+                                </del>
+                            </small>
+                        </h4>
+
+                        <strong class="text-danger" *ngIf="mobile.noOfItems < 10">
+                            Only {{mobile.noOfItems}} Left!!
+                        </strong> 
+                    </div>
+                </div>
+            </div>
+
+             <p *ngIf="!mobile.isAvailable"
+                class="notAwailableText">
+                Product is not available
+            </p> 
+            <button class="btn bg-primary btn-block" [disabled]="!mobile.isAvailable">{{mobile.isAvailable ? 'Buy Now' : 'Out Of Stock'}}</button> 
+        </div>
+        
+    </div>
+</div>
